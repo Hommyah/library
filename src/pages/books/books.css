@@ -1,0 +1,86 @@
+.page {
+    background: url("/src/media/pergament.jpg");
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%;
+    height: 100%;
+}
+
+.head {
+    font-size: 2rem;
+    color: #38290e;
+    font-weight: bold;
+    font-style: italic;
+    margin: 10px;
+}
+
+.search {
+    width: 65%;
+    height: 4%;
+    margin: 10px;
+}
+
+.btn {
+    background: #dec26e;
+    height: 27px;
+    width: 79px;
+    color: #4b3612;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.popularBook {
+    color: #38290e;
+    font-weight: bold;
+    font-style: italic;
+    margin: 10px;
+    font-size: large;
+}
+
+.popularBook__list {
+    display: flex;
+    overflow-y: auto;
+    height: 40vh;
+    margin: 15px;
+}
+
+.book {
+    height: 90%;
+    min-width: 15%;
+    background: #4b3612;
+    margin-right: 15px;
+}
+
+.popularAuthor {
+    color: #38290e;
+    font-weight: bold;
+    font-style: italic;
+    margin: 10px;
+    font-size: large;
+}
+
+.popularAuthor__list {
+    display: flex;
+    overflow-y: auto;
+    height: 20vh;
+    margin: 15px;
+}
+
+.author {
+    width: 10%;
+    margin-right: 15px;
+}
+
+.author__img {
+    min-height: 72%;
+    width: 90%;
+    background: #4b3612;
+    border-radius: 50%;
+}
+
+.author__name {
+    color: #38290e;
+    font-weight: bold;
+    font-style: italic;
+}

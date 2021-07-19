@@ -1,11 +1,11 @@
 import React from 'react';
 import Books from "./pages/books";
-import BookList from "./components/bookList";
+import Book from "./components/book";
 
 function App() {
   return (
-    <div className="App">
-      <BookList/>
+    <div className="App" style={{height:"100%"}}>
+      <Books/>
     </div>
   );
 }
