@@ -1,6 +1,7 @@
 import React from 'react';
 import Books from "./pages/books";
-import Book from "./components/book";
+
+import "./styles/fontawesome-free-5.15.3-web/css/all.css"
 
 function App() {
   return (
