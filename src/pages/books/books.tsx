@@ -9,6 +9,7 @@ const Books = () => {
     const [clicked, setClick] = React.useState<boolean>(false);
     const [timer, changeTimer] = React.useState(0);
     const [load, setLoad] = React.useState<boolean>(false);
+    const [search, setSearch] = React.useState('')
 
 
     const handleQuery = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -42,11 +43,14 @@ const Books = () => {
         setLoad(true);
         makeGet(Urls.book.searchByQuery(query)).then((resp) => {
             console.log(resp.data)
+
         }).catch((e) => {
             alert(e.response)
         }).finally(() => setLoad(false))
         setQuery("")
     }, [query])
+
+
 
     return (
         <div className='page'>
