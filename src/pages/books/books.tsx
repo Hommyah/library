@@ -1,16 +1,20 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useEffect} from "react";
 import "./books.css"
 import {makeGet} from "../../utils/network";
 import {Domain, Urls} from "../../utils/urls";
-
+import Book, {BookType} from "../../components/book";
 
 const Books = () => {
     const [query, setQuery] = React.useState<string>("");
     const [clicked, setClick] = React.useState<boolean>(false);
     const [timer, changeTimer] = React.useState(0);
     const [load, setLoad] = React.useState<boolean>(false);
-    const [search, setSearch] = React.useState('')
+    const [books, setBooks] = React.useState<Array<BookType>>([])
 
+
+    useEffect(() => {
+        setQuery("harry potter")
+    }, [])
 
     const handleQuery = React.useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const val = e.target.value;
@@ -41,15 +45,23 @@ const Books = () => {
             setClick(false)
         }, 2000)
         setLoad(true);
-        makeGet(Urls.book.searchByQuery(query)).then((resp) => {
-            console.log(resp.data)
 
+        makeGet(Urls.book.searchByQuery(query)).then((resp) => {
+            // let data = resp.data.docs.slice(0, 5);
+            // let keys = data.map((obj: { key: string }) => (obj.key))
+            setQuery("")
         }).catch((e) => {
             alert(e.response)
         }).finally(() => setLoad(false))
-        setQuery("")
-    }, [query])
 
+
+    }, [books, query])
+
+    const handleClick = () => {
+        let temp = [...books];
+        temp.push({ISBN: "", cover: 0, ol: "", author: '', title: ''})
+        setBooks(temp)
+    }
 
 
     return (
@@ -60,7 +72,7 @@ const Books = () => {
                 if (event.key === "Enter") {
                     setLoad(true);
                     makeGet(Urls.book.searchByQuery(query)).then((resp) => {
-                        console.log(resp.data);
+                        //console.log(resp.data);
                         setQuery("")
                     }).catch((e) => {
                         alert(e.response)
@@ -69,6 +81,7 @@ const Books = () => {
             }
             }/>
             <button className='btn' disabled={clicked} onClick={handleSearch}>Поиск</button>
+            <button onClick={handleClick}>Click</button>
             <div>
                 <div className="load">
                     {load ?
@@ -77,15 +90,10 @@ const Books = () => {
                 </div>
                 <div className='popularBook'>Популярные книги:</div>
                 <div className='popularBook__list'>
-                    <div className='book'>1</div>
-                    <div className='book'>1</div>
-                    <div className='book'>1</div>
-                    <div className='book'>1</div>
-                    <div className='book'>1</div>
-                    <div className='book'>1</div>
-                    <div className='book'>1</div>
-                    <div className='book'>1</div>
-                    <div className='book'>1</div>
+                    {books.map((book, idx) => (<Book key={idx} author={book.author} ISBN={book.ISBN}
+                                                     cover={book.cover}
+                                                     ol={book.ol}
+                                                     title={book.title}/>))}
                 </div>
             </div>
             <div>
